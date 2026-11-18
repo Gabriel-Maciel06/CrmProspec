@@ -1,0 +1,4352 @@
+/* ==========================================================================
+   ISAPEL PAPÉIS - CRM B2B DESIGN SYSTEM & THEME
+   Arquivo: crm-theme.css
+   Versão: 1.0.0 Oficial
+   Identidade: Azul Fábrica (#003360), Azul Claro (#0284C7 / #38BDF8),
+               Branco Neve (#FFFFFF), Dourado Troféu / Pódio (#E3A52B)
+   Padrão: Anti-Slop, Ultra-Crisp Precision Borders, WCAG AA/AAA
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+/* ==========================================================================
+   1. DESIGN TOKENS & VARIÁVEIS CSS
+   ========================================================================== */
+:root {
+  /* --- Cores Primárias Isapel --- */
+  --isapel-navy: #003360;          /* Dark Navy Fábrica Isapel */
+  --isapel-navy-dark: #002244;     /* Navy Profundo para Contrastes e Sombras */
+  --isapel-navy-light: #0b457a;    /* Navy Suave para Hovers */
+  
+  --isapel-sky: #0284C7;           /* Sky Blue Corporativo Vivo (Primary Action) */
+  --isapel-sky-dark: #0369A1;      /* Sky Escuro de Alto Contraste WCAG AA (5.5:1) */
+  --isapel-sky-hover: #0284C7;     /* Sky Hover Interativo */
+  --isapel-sky-light: #38BDF8;     /* Sky Light para Acentos, Badges e Destaques */
+  --isapel-sky-soft: #E0F2FE;      /* Fundo suave Sky Tint */
+  --isapel-sky-border: rgba(2, 132, 199, 0.25);
+
+  /* --- Superfícies e Fundos Limpos --- */
+  --bg-app: #F8FAFC;               /* Canvas de Fundo Geral */
+  --bg-surface: #FFFFFF;           /* Cards e Superfícies Brancas Neve */
+  --bg-column: #F1F5F9;            /* Fundo de Colunas Kanban */
+  --bg-muted: #F8FAFC;             /* Fundo Neutro Suave */
+  --bg-hover: #F1F5F9;             /* Estados de Hover Gerais */
+
+  /* --- Linhas e Bordas Cirúrgicas (Anti-Slop) --- */
+  --border-subtle: #E2E8F0;        /* Borda padrão de 1px */
+  --border-focus: #38BDF8;         /* Borda de Foco Ativo */
+  --border-strong: #CBD5E1;        /* Borda de Ênfase */
+
+  /* --- Acentos Corporativos de Suporte --- */
+  --isapel-gold: #E3A52B;          /* Dourado Troféu (1º Lugar Pódio) */
+  --isapel-gold-soft: #FEF3C7;     /* Fundo Dourado Suave */
+  --isapel-gold-text: #92400E;     /* Texto Contraste Ouro */
+
+  --isapel-emerald: #059669;       /* Verde Esmeralda WCAG AA (Fechado / Ganho) */
+  --isapel-emerald-dark: #047857;  /* Verde Escuro para Botões e Ações */
+  --isapel-emerald-soft: #D1FAE5;  /* Fundo Verde Suave */
+  --isapel-emerald-text: #065F46;  /* Texto Verde Escuro */
+
+  --isapel-amber: #F59E0B;         /* Âmbar Follow-up / Atenção */
+  --isapel-amber-soft: #FEF3C7;    /* Fundo Âmbar */
+  --isapel-amber-text: #92400E;    /* Texto Âmbar Escuro */
+
+  --isapel-indigo: #6366F1;        /* Roxo/Índigo para Amostras e Envio */
+  --isapel-indigo-soft: #EEF2FF;   /* Fundo Amostras */
+  --isapel-indigo-text: #3730A3;   /* Texto Amostras */
+
+  --isapel-carmine: #EF4444;       /* Carmim Suave para Perdido / Alerta Crítico */
+  --isapel-carmine-soft: #FEE2E2;  /* Fundo Carmim */
+  --isapel-carmine-text: #991B1B;  /* Texto Carmim */
+
+  --isapel-slate: #64748B;         /* Cinza Corporativo / Standby */
+  --isapel-slate-soft: #F1F5F9;    /* Fundo Cinza Neutro */
+  --isapel-slate-text: #334155;    /* Texto Cinza Escuro */
+
+  /* --- Tipografia & Texto --- */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-condensed: 'Barlow Condensed', 'Inter', sans-serif;
+
+  --text-main: #0F172A;            /* Slate 900 - Alta legibilidade */
+  --text-muted: #64748B;           /* Slate 500 - Legendas e Metadados */
+  --text-dim: #94A3B8;             /* Slate 400 - Desabilitados / Placeholders */
+  --text-white: #FFFFFF;           /* Branco Puro */
+
+  /* --- Sombras Anti-Slop (Precisão Sem Borrões Gigantes) --- */
+  --shadow-xs: 0 1px 2px rgba(0, 51, 96, 0.04);
+  --shadow-sm: 0 1px 3px rgba(0, 51, 96, 0.06), 0 1px 2px rgba(0, 51, 96, 0.04);
+  --shadow-md: 0 4px 6px -1px rgba(0, 51, 96, 0.08), 0 2px 4px -2px rgba(0, 51, 96, 0.05);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 51, 96, 0.08), 0 4px 6px -4px rgba(0, 51, 96, 0.04);
+  --shadow-hover: 0 6px 12px -2px rgba(2, 132, 199, 0.12), 0 2px 4px -1px rgba(0, 51, 96, 0.04);
+  --shadow-modal: 0 20px 25px -5px rgba(0, 34, 68, 0.2), 0 8px 10px -6px rgba(0, 34, 68, 0.15);
+  --shadow-glow-sky: 0 0 0 3px rgba(56, 189, 248, 0.25);
+  --shadow-glow-gold: 0 0 15px rgba(227, 165, 43, 0.35);
+
+  /* --- Espaçamentos & Raios --- */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --radius-full: 9999px;
+
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 220ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: 300ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ==========================================================================
+   2. RESET E CONFIGURAÇÕES GERAIS
+   ========================================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--bg-app);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* Skip link acessível no topo (WCAG 2.4.1) */
+.crm-skip-link {
+  position: absolute;
+  top: -9999px;
+  left: 1rem;
+  z-index: 10000;
+  padding: 0.6rem 1.2rem;
+  background: var(--isapel-sky-light);
+  color: var(--isapel-navy-dark);
+  font-weight: 800;
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--isapel-navy);
+  text-decoration: none;
+}
+.crm-skip-link:focus {
+  top: 1rem;
+  outline: 3px solid #FFFFFF;
+}
+
+/* Utilitário para leitores de tela */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Indicador Universal de Foco de Alta Visibilidade (WCAG 2.4.7) */
+:focus-visible {
+  outline: 2px solid var(--isapel-sky);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(2, 132, 199, 0.25);
+}
+
+/* Foco em superfícies escuras (Header e Banner Navy) */
+.crm-header :focus-visible,
+.crm-closing-hero :focus-visible {
+  outline: 2px solid #FFFFFF;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.5);
+}
+
+a {
+  color: var(--isapel-sky);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--isapel-sky-hover);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-track {
+  background: #F1F5F9;
+  border-radius: var(--radius-full);
+}
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: var(--radius-full);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
+}
+
+/* ==========================================================================
+   3. HEADER INSTITUCIONAL ISAPEL
+   ========================================================================== */
+.crm-header {
+  background: var(--isapel-navy);
+  color: var(--text-white);
+  padding: 0 1.5rem;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid var(--isapel-sky);
+  box-shadow: 0 2px 10px rgba(0, 34, 68, 0.25);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.crm-header__brand-group {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.crm-header__logo {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.3));
+}
+
+.crm-header__title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.crm-header__title {
+  font-family: var(--font-condensed);
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-white);
+}
+
+.crm-header__badge-copilot {
+  background: linear-gradient(135deg, #0284C7 0%, #38BDF8 100%);
+  color: #FFFFFF;
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-full);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.crm-header__badge-copilot::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  animation: pulseSubtle 2s infinite ease-in-out;
+}
+
+/* Abas de Navegação no Header */
+.crm-header__nav-tabs {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: rgba(0, 34, 68, 0.6);
+  padding: 0.25rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.crm-header__tab-btn {
+  padding: 0.45rem 1rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #94A3B8;
+  border-radius: var(--radius-md);
+  transition: background-color var(--transition-fast), color var(--transition-fast), transform 70ms ease-out;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+}
+
+.crm-header__tab-btn:hover {
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.crm-header__tab-btn:active {
+  transform: scale(0.96);
+}
+
+.crm-header__tab-btn.is-active {
+  background: var(--isapel-sky-dark);
+  color: #FFFFFF;
+}
+
+/* Área do Vendedor & Ações */
+.crm-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+#btn-quick-fechamento-header {
+  background: var(--isapel-navy-light);
+  color: #FFFFFF;
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.4rem 0.85rem;
+  border-radius: var(--radius-md);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: background-color var(--transition-fast), border-color var(--transition-fast), transform 70ms ease-out;
+}
+
+#btn-quick-fechamento-header:hover {
+  background: var(--isapel-sky);
+  border-color: var(--isapel-sky-light);
+  transform: translateY(-1px);
+}
+
+#btn-quick-fechamento-header:active {
+  transform: scale(0.96);
+}
+
+.crm-header__seller-picker {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(255, 255, 255, 0.07);
+  padding: 0.3rem 0.75rem 0.3rem 0.35rem;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.crm-header__seller-picker:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: var(--isapel-sky-light);
+}
+
+.crm-header__seller-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--isapel-sky-light), var(--isapel-sky));
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border: 1.5px solid #FFFFFF;
+}
+
+.crm-header__seller-meta {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+  text-align: left;
+}
+
+.crm-header__seller-label {
+  font-size: 0.75rem;
+  color: #94A3B8;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.crm-header__seller-name {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #FFFFFF;
+}
+
+.crm-header__seller-select {
+  background: transparent;
+  border: none;
+  color: #FFFFFF;
+  font-size: 0.82rem;
+  font-weight: 600;
+  outline: none;
+  cursor: pointer;
+}
+
+.crm-header__seller-select option {
+  background: var(--isapel-navy);
+  color: #FFFFFF;
+}
+
+/* ==========================================================================
+   RBAC & PERFIL DO USUÁRIO NO HEADER
+   ========================================================================== */
+.crm-header__user-profile {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 0.3rem 0.75rem 0.3rem 0.35rem;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  transition: all var(--transition-fast);
+}
+
+.crm-header__user-profile:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.crm-role-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.1rem 0.45rem;
+  border-radius: 4px;
+  line-height: 1.2;
+  margin-top: 1px;
+  background: rgba(255, 255, 255, 0.15);
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-family: var(--font-condensed);
+}
+
+.crm-role-badge--vendedor {
+  background: rgba(56, 189, 248, 0.16);
+  color: #38BDF8;
+  border-color: rgba(56, 189, 248, 0.38);
+}
+
+.crm-role-badge--diretoria {
+  background: rgba(245, 158, 11, 0.18);
+  color: #FCD34D;
+  border-color: rgba(245, 158, 11, 0.42);
+}
+
+#btn-logout {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  height: 32px;
+  padding: 0 0.75rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #E2E8F0;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+#btn-logout:hover {
+  background: rgba(239, 68, 68, 0.18);
+  border-color: rgba(239, 68, 68, 0.45);
+  color: #FCA5A5;
+  transform: translateY(-1px);
+}
+
+#btn-logout:active {
+  transform: translateY(0);
+}
+
+#btn-logout:focus-visible {
+  outline: 2px solid var(--isapel-sky-light);
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   4. BARRA DE CADASTRO RÁPIDO & LOGÍSTICA ISAPEL
+   ========================================================================== */
+.crm-quick-bar {
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 0.85rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  box-shadow: var(--shadow-xs);
+}
+
+.crm-quick-bar__form {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 1;
+  max-width: 860px;
+}
+
+.crm-quick-bar__title {
+  font-family: var(--font-condensed);
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--isapel-navy);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  white-space: nowrap;
+}
+
+.crm-quick-bar__title-icon {
+  color: var(--isapel-sky);
+  font-size: 1.1rem;
+}
+
+.crm-quick-bar__field-group {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.crm-quick-bar__input {
+  width: 100%;
+  height: 38px;
+  padding: 0 0.85rem;
+  background: #F8FAFC;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  color: var(--text-main);
+  transition: all var(--transition-fast);
+}
+
+.crm-quick-bar__input::placeholder {
+  color: var(--text-dim);
+}
+
+.crm-quick-bar__input:hover {
+  border-color: #CBD5E1;
+  background: #FFFFFF;
+}
+
+.crm-quick-bar__input:focus {
+  outline: none;
+  background: #FFFFFF;
+  border-color: var(--isapel-sky);
+  box-shadow: var(--shadow-glow-sky);
+}
+
+/* Badge Dinâmico de DDD/Região com Animação SlideDown (Alto Contraste WCAG AA) */
+.crm-quick-bar__ddd-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.7rem;
+  background: var(--isapel-sky-soft);
+  color: #0369A1; /* Contraste > 4.8:1 sobre fundo sky-soft */
+  border: 1px solid rgba(2, 132, 199, 0.35);
+  border-radius: var(--radius-full);
+  font-size: 0.78rem;
+  font-weight: 700;
+  white-space: nowrap;
+  max-width: calc(100vw - 48px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  animation: slideDown 220ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.crm-quick-bar__btn-submit {
+  height: 38px;
+  padding: 0 1.25rem;
+  background: var(--isapel-sky-dark);
+  color: #FFFFFF;
+  font-weight: 600;
+  font-size: 0.85rem;
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  transition: background-color var(--transition-fast), transform 70ms ease-out;
+  white-space: nowrap;
+}
+
+.crm-quick-bar__btn-submit:hover {
+  background: var(--isapel-sky);
+  transform: translateY(-1px);
+}
+
+.crm-quick-bar__btn-submit:active {
+  transform: scale(0.96);
+}
+
+/* Tag Colorida de Logística Isapel */
+.crm-quick-bar__logistics-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.85rem;
+  background: #F0FDF4;
+  border: 1px solid #BBF7D0;
+  border-radius: var(--radius-full);
+  color: #166534;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.crm-quick-bar__logistics-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--isapel-emerald);
+}
+
+/* ==========================================================================
+   5. QUADRO KANBAN DE QUALIFICAÇÃO (7 COLUNAS)
+   ========================================================================== */
+.crm-kanban-wrapper {
+  padding: 1.25rem 2.5rem;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  height: calc(100vh - 128px);
+}
+
+.crm-kanban-board {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(220px, 1fr));
+  gap: 0.85rem;
+  min-width: 1620px;
+  height: 100%;
+  align-items: stretch;
+}
+
+/* Coluna do Kanban */
+.crm-kanban-col {
+  background: var(--bg-column);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-height: calc(100vh - 154px);
+  box-shadow: var(--shadow-xs);
+  transition: border-color var(--transition-fast), background var(--transition-fast);
+}
+
+.crm-kanban-col.is-drag-over {
+  border-color: var(--isapel-sky-light);
+  background: #E0F2FE;
+  box-shadow: 0 0 0 2px var(--isapel-sky-light);
+}
+
+/* Cabeçalho da Coluna */
+.crm-kanban-col__header {
+  padding: 0.85rem 1rem;
+  background: #FFFFFF;
+  border-top-left-radius: var(--radius-md);
+  border-top-right-radius: var(--radius-md);
+  border-bottom: 1px solid var(--border-subtle);
+  position: relative;
+}
+
+.crm-kanban-col__indicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  border-top-left-radius: var(--radius-md);
+  border-top-right-radius: var(--radius-md);
+}
+
+/* Cores dos Indicadores de Coluna */
+.crm-kanban-col--1 .crm-kanban-col__indicator { background: var(--isapel-navy); }
+.crm-kanban-col--2 .crm-kanban-col__indicator { background: var(--isapel-sky); }
+.crm-kanban-col--3 .crm-kanban-col__indicator { background: var(--isapel-indigo); }
+.crm-kanban-col--4 .crm-kanban-col__indicator { background: var(--isapel-amber); }
+.crm-kanban-col--5 .crm-kanban-col__indicator { background: var(--isapel-emerald); } /* Fechado/Ganho = Verde Esmeralda */
+.crm-kanban-col--6 .crm-kanban-col__indicator { background: var(--isapel-carmine); } /* Perdido = Carmim/Vermelho */
+.crm-kanban-col--7 .crm-kanban-col__indicator { background: #0D9488; } /* Cadência = Teal */
+
+.crm-kanban-col__title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.35rem;
+}
+
+.crm-kanban-col__title {
+  font-family: var(--font-condensed);
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--isapel-navy);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.crm-kanban-col__badge-count {
+  background: #E2E8F0;
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-full);
+}
+
+.crm-kanban-col__summary-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.crm-kanban-col__total-value {
+  font-weight: 700;
+  color: var(--isapel-navy);
+}
+
+/* Área de Drop / Lista de Cards */
+.crm-kanban-col__body {
+  padding: 0.75rem;
+  overflow-y: auto;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  min-height: 120px;
+}
+
+/* Estado Vazio de Alto Contraste (WCAG AA > 4.5:1) */
+.crm-kanban-col__empty {
+  padding: 1.75rem 1rem;
+  text-align: center;
+  color: #475569; /* Contraste 5.2:1 sobre #F1F5F9 */
+  font-size: 0.82rem;
+  font-weight: 500;
+  border: 1.5px dashed #CBD5E1;
+  border-radius: var(--radius-sm);
+  margin: 0.5rem;
+  background: rgba(255, 255, 255, 0.45);
+}
+
+/* Card do Lead */
+.crm-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 0.85rem;
+  box-shadow: var(--shadow-sm);
+  cursor: grab;
+  transition: transform 180ms cubic-bezier(0.2, 0, 0, 1),
+              box-shadow 180ms cubic-bezier(0.2, 0, 0, 1),
+              border-color 150ms ease;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  will-change: transform, box-shadow;
+}
+
+.crm-card:hover {
+  border-color: var(--isapel-sky-light);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
+.crm-card.is-dragging {
+  opacity: 0.55;
+  transform: scale(1.025) rotate(1.2deg);
+  box-shadow: 0 16px 32px rgba(0, 51, 96, 0.25);
+  border: 1.5px solid var(--isapel-sky);
+  cursor: grabbing !important;
+}
+
+@keyframes cardDropSettle {
+  0% {
+    transform: scale(1.03) translateY(-4px);
+    box-shadow: 0 12px 20px -3px rgba(0, 51, 96, 0.16);
+  }
+  60% {
+    transform: scale(0.99) translateY(1px);
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    box-shadow: var(--shadow-sm);
+  }
+}
+
+.crm-card.is-just-dropped {
+  animation: cardDropSettle 280ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Topo do Card: Região, Segmento e Tags */
+.crm-card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.4rem;
+}
+
+.crm-card__region-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: #EFF6FF;
+  color: #0369A1; /* Sky 700: Alto Contraste */
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid #BFDBFE;
+  max-width: 140px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.crm-card__seller-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: #F1F5F9;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-full);
+  padding: 0.15rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.crm-card__seller-initials {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--isapel-sky);
+  color: #FFFFFF;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  font-weight: 800;
+}
+
+.crm-card__tag {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.15rem 0.45rem;
+  border-radius: var(--radius-sm);
+}
+
+.crm-card__tag--sample {
+  background: var(--isapel-indigo-soft);
+  color: var(--isapel-indigo-text);
+  border: 1px solid #C7D2FE;
+}
+
+.crm-card__tag--high {
+  background: #FEF2F2;
+  color: #B91C1C;
+  border: 1px solid #FECACA;
+}
+
+.crm-card__tag--gold {
+  background: var(--isapel-gold-soft);
+  color: var(--isapel-gold-text);
+  border: 1px solid #FDE68A;
+}
+
+.crm-card__date {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* Título e Cliente */
+.crm-card__client-name {
+  font-size: 0.94rem;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.3;
+}
+
+.crm-card__segment {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+/* Dados de Contato e Botão WhatsApp 1-Clique */
+.crm-card__contact-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.4rem;
+  background: #F8FAFC;
+  padding: 0.4rem 0.55rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid #EDF2F7;
+  min-width: 0;
+}
+
+.crm-card__phone-text {
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+
+.crm-card__whatsapp-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: #047857; /* Verde Escuro Esmeralda: Contraste 4.54:1 com branco (WCAG AA) */
+  color: #FFFFFF;
+  font-size: 0.76rem;
+  font-weight: 700;
+  min-height: 36px;
+  padding: 0.35rem 0.65rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid #065F46;
+  transition: background-color var(--transition-fast), transform 70ms ease-out;
+  touch-action: manipulation;
+  text-decoration: none;
+}
+
+.crm-card__whatsapp-btn:hover {
+  background: #065F46;
+  color: #FFFFFF;
+  transform: translateY(-1px);
+}
+
+.crm-card__whatsapp-btn:active {
+  transform: scale(0.95);
+}
+
+/* ==========================================================================
+   TIPO / PERFIL DE CLIENTE NO CARD DO FUNIL (DISTRIBUIDOR, LICITAÇÃO, ETC)
+   ========================================================================== */
+.crm-card__tipo-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 0.1rem;
+  margin-bottom: 0.15rem;
+}
+
+.crm-card__tipo-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.74rem;
+  font-weight: 700;
+  padding: 0.22rem 0.55rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  cursor: pointer;
+  background: #F1F5F9;
+  color: #475569;
+  transition: all var(--transition-fast);
+  touch-action: manipulation;
+  user-select: none;
+  line-height: 1.2;
+}
+
+.crm-card__tipo-btn:hover {
+  filter: brightness(0.95);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.crm-card__tipo-btn:active {
+  transform: translateY(0);
+}
+
+.crm-card__tipo-btn--distribuidor {
+  background: #F3E8FF;
+  color: #6B21A8;
+  border-color: #D8B4FE;
+}
+
+.crm-card__tipo-btn--licitacao {
+  background: #FEF3C7;
+  color: #92400E;
+  border-color: #FCD34D;
+}
+
+.crm-card__tipo-btn--consumidor_final {
+  background: #D1FAE5;
+  color: #065F46;
+  border-color: #6EE7B7;
+}
+
+.crm-card__tipo-btn--outro {
+  background: #F1F5F9;
+  color: #334155;
+  border-color: #CBD5E1;
+}
+
+.crm-card__tipo-btn--indefinido {
+  background: #F8FAFC;
+  color: #0369A1;
+  border: 1.5px dashed #93C5FD;
+}
+
+.crm-card__tipo-btn--indefinido:hover {
+  background: #EFF6FF;
+  border-color: #38BDF8;
+}
+
+.crm-card__tipo-icon {
+  font-size: 0.85rem;
+  line-height: 1;
+}
+
+.crm-card__tipo-chevron {
+  opacity: 0.7;
+  transition: transform var(--transition-fast);
+}
+
+.crm-card__tipo-btn[aria-expanded="true"] .crm-card__tipo-chevron {
+  transform: rotate(180deg);
+}
+
+/* Popover Flutuante de Seleção de Tipo */
+.crm-tipo-popover {
+  position: fixed;
+  background: #FFFFFF;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  box-shadow: 0 16px 36px -4px rgba(0, 51, 96, 0.22), 0 6px 14px -2px rgba(0, 0, 0, 0.1);
+  padding: 0.45rem;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 230px;
+  animation: popoverFadeIn 150ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes popoverFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.crm-tipo-popover__header {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  padding: 0.3rem 0.5rem 0.2rem;
+  border-bottom: 1px solid #F1F5F9;
+  margin-bottom: 0.15rem;
+}
+
+.crm-tipo-popover__option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.45rem 0.6rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+  transition: background-color var(--transition-fast);
+  width: 100%;
+}
+
+.crm-tipo-popover__option:hover {
+  background: #F8FAFC;
+}
+
+.crm-tipo-popover__option.is-active {
+  background: #EFF6FF;
+  border-color: #BFDBFE;
+}
+
+.crm-tipo-popover__left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.crm-tipo-popover__opt-icon {
+  font-size: 1.05rem;
+  line-height: 1;
+}
+
+.crm-tipo-popover__opt-title {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #1E293B;
+  display: block;
+}
+
+.crm-tipo-popover__opt-desc {
+  font-size: 0.7rem;
+  color: #64748B;
+  display: block;
+}
+
+.crm-tipo-popover__check {
+  color: #0284C7;
+  font-weight: 800;
+}
+
+/* Linha de Métricas do Card: Dias do Contato Inicial + Valor */
+.crm-card__metrics-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 0.15rem;
+}
+
+.crm-card__value-text {
+  color: var(--isapel-navy);
+  font-size: 0.88rem;
+  font-weight: 700;
+  margin-left: auto;
+}
+
+.crm-card__days-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.28rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.16rem 0.48rem;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+  line-height: 1.25;
+}
+
+.crm-card__days-badge--fresh {
+  background: #ECFDF5;
+  color: #047857;
+  border: 1px solid #A7F3D0;
+}
+
+.crm-card__days-badge--warm {
+  background: #FFFBEB;
+  color: #B45309;
+  border: 1px solid #FDE68A;
+}
+
+.crm-card__days-badge--alert {
+  background: #FEF2F2;
+  color: #B91C1C;
+  border: 1px solid #FECACA;
+}
+
+.crm-card__days-badge--neutral {
+  background: #F1F5F9;
+  color: #475569;
+  border: 1px solid #CBD5E1;
+}
+
+/* Trecho de Anotações */
+.crm-card__notes-snippet {
+  font-size: 0.78rem;
+  color: #334155;
+  background: #F8FAFC;
+  border-left: 2px solid var(--isapel-sky);
+  padding: 0.35rem 0.55rem;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+/* Rodapé do Card: Ações Rápidas */
+.crm-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 0.35rem;
+  border-top: 1px solid #F1F5F9;
+}
+
+.crm-card__volume {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--isapel-navy);
+}
+
+.crm-card__btn-advance {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #0369A1;
+  min-height: 36px;
+  min-width: 44px;
+  padding: 0.35rem 0.6rem;
+  border-radius: var(--radius-sm);
+  transition: background-color var(--transition-fast), color var(--transition-fast), transform 70ms ease-out;
+}
+
+.crm-card__btn-advance:hover {
+  background: var(--isapel-sky-soft);
+  color: var(--isapel-sky-hover);
+}
+
+.crm-card__btn-advance:active {
+  transform: scale(0.96);
+}
+
+/* Botão de WhatsApp Rápido nos Cards Táticos de Fechamento */
+.crm-tactical-card__wa-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  background: #047857;
+  color: #FFFFFF;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.3rem 0.65rem;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  border: 1px solid #065F46;
+  transition: background-color var(--transition-fast), transform 70ms ease-out;
+  align-self: flex-start;
+  margin-top: 0.3rem;
+  min-height: 32px;
+}
+
+.crm-tactical-card__wa-btn:hover {
+  background: #065F46;
+  color: #FFFFFF;
+  transform: translateY(-1px);
+}
+
+.crm-tactical-card__wa-btn:active {
+  transform: scale(0.95);
+}
+
+/* ==========================================================================
+   6. ARENA DE COMPETIÇÃO 3D & GAMIFICAÇÃO ISAPEL
+   ========================================================================== */
+.crm-arena-view {
+  padding: 1.5rem;
+  max-width: 1600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.crm-arena-view__hero {
+  background: linear-gradient(135deg, var(--isapel-navy) 0%, #001f3f 100%);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem 2rem;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  box-shadow: var(--shadow-lg);
+}
+
+.crm-arena-view__title-group h2 {
+  font-family: var(--font-condensed);
+  font-size: 1.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #FFFFFF;
+}
+
+.crm-arena-view__subtitle {
+  color: #94A3B8;
+  font-size: 0.88rem;
+  margin-top: 0.25rem;
+}
+
+.crm-arena-view__target-metric {
+  text-align: right;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.crm-arena-view__target-metric-label {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  color: var(--isapel-sky-light);
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+.crm-arena-view__target-metric-value {
+  font-family: var(--font-condensed);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #FFFFFF;
+}
+
+/* Grid da Arena: Canvas 3D e Placar */
+.crm-arena-grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 1.5rem;
+  align-items: stretch;
+}
+
+/* Moldura do Canvas 3D */
+.crm-arena-canvas-card {
+  background: #00162B;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  box-shadow: var(--shadow-lg), 0 0 30px rgba(2, 132, 199, 0.15);
+  overflow: hidden;
+  position: relative;
+  min-height: 480px;
+  display: flex;
+  flex-direction: column;
+}
+
+.crm-arena-canvas-header {
+  padding: 1rem 1.25rem;
+  background: rgba(0, 34, 68, 0.7);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 2;
+}
+
+.crm-arena-canvas-title {
+  color: #FFFFFF;
+  font-family: var(--font-condensed);
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.crm-arena-canvas-title::before {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--isapel-emerald);
+  box-shadow: 0 0 8px var(--isapel-emerald);
+}
+
+.crm-arena-canvas-container {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.crm-arena-canvas-container canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+
+/* Pódio dos Campeões */
+.crm-podium-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.crm-podium-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 0.75rem;
+}
+
+.crm-podium-title {
+  font-family: var(--font-condensed);
+  font-size: 1.15rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--isapel-navy);
+}
+
+/* Estrutura do Pódio (1º, 2º e 3º) */
+.crm-podium-stage {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1.5rem 0 0.5rem 0;
+}
+
+.crm-podium-pillar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  flex: 1;
+}
+
+.crm-podium-avatar-wrap {
+  position: relative;
+  margin-bottom: 0.5rem;
+}
+
+.crm-podium-avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #CBD5E1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: #FFFFFF;
+  border: 2px solid #FFFFFF;
+  box-shadow: var(--shadow-sm);
+}
+
+.crm-podium-crown {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.2rem;
+  filter: drop-shadow(0 2px 4px rgba(227, 165, 43, 0.5));
+}
+
+.crm-podium-name {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-main);
+  white-space: nowrap;
+}
+
+.crm-podium-score {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+
+.crm-podium-block {
+  width: 100%;
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-condensed);
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #FFFFFF;
+}
+
+/* 1º Lugar - Ouro Isapel */
+.crm-podium-pillar--1 .crm-podium-avatar {
+  width: 64px;
+  height: 64px;
+  border-color: var(--isapel-gold);
+  background: linear-gradient(135deg, #F59E0B, var(--isapel-gold));
+  box-shadow: var(--shadow-glow-gold);
+}
+.crm-podium-pillar--1 .crm-podium-block {
+  height: 110px;
+  background: linear-gradient(180deg, #E3A52B 0%, #B45309 100%);
+  box-shadow: 0 4px 15px rgba(227, 165, 43, 0.3);
+}
+
+/* 2º Lugar - Prata */
+.crm-podium-pillar--2 .crm-podium-avatar {
+  background: linear-gradient(135deg, #94A3B8, #64748B);
+}
+.crm-podium-pillar--2 .crm-podium-block {
+  height: 80px;
+  background: linear-gradient(180deg, #94A3B8 0%, #475569 100%);
+}
+
+/* 3º Lugar - Bronze */
+.crm-podium-pillar--3 .crm-podium-avatar {
+  background: linear-gradient(135deg, #D97706, #78350F);
+}
+.crm-podium-pillar--3 .crm-podium-block {
+  height: 60px;
+  background: linear-gradient(180deg, #B45309 0%, #78350F 100%);
+}
+
+/* Lista de Metas e Barras de Progresso */
+.crm-ranking-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.crm-ranking-item {
+  background: #F8FAFC;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 0.65rem 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.crm-ranking-item__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.crm-ranking-item__name {
+  font-weight: 600;
+  font-size: 0.82rem;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.crm-ranking-item__val {
+  font-weight: 700;
+  font-size: 0.82rem;
+  color: var(--isapel-navy);
+}
+
+.crm-progress-bar {
+  width: 100%;
+  height: 8px;
+  background: #E2E8F0;
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.crm-progress-bar__fill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  background: linear-gradient(90deg, var(--isapel-sky-light) 0%, var(--isapel-navy) 100%);
+  transition: width 400ms ease;
+}
+
+/* ==========================================================================
+   7. MODAL & PAINEL DE FECHAMENTO DO DIA
+   ========================================================================== */
+.crm-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 34, 68, 0.7);
+  backdrop-filter: blur(0px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 240ms cubic-bezier(0.4, 0, 0.2, 1),
+              visibility 240ms cubic-bezier(0.4, 0, 0.2, 1),
+              backdrop-filter 240ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.crm-modal-backdrop.is-open {
+  opacity: 1;
+  visibility: visible;
+  backdrop-filter: blur(6px);
+}
+
+.crm-modal {
+  background: #FFFFFF;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-modal);
+  width: 100%;
+  max-width: 780px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transform: scale(0.95) translateY(14px);
+  opacity: 0;
+  transition: transform 260ms cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 220ms ease-out;
+  will-change: transform, opacity;
+}
+
+.crm-modal-backdrop.is-open .crm-modal {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+}
+
+.crm-modal__header {
+  padding: 1.25rem 1.5rem;
+  background: var(--isapel-navy);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid var(--isapel-sky);
+}
+
+.crm-modal__title {
+  font-family: var(--font-condensed);
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.crm-modal__close-btn {
+  color: #94A3B8;
+  font-size: 1.4rem;
+  line-height: 1;
+  padding: 0.25rem;
+  border-radius: var(--radius-sm);
+  transition: transform 160ms ease, color var(--transition-fast);
+}
+
+.crm-modal__close-btn:hover {
+  color: #FFFFFF;
+  transform: rotate(90deg) scale(1.1);
+}
+
+.crm-modal__close-btn:active {
+  transform: rotate(90deg) scale(0.92);
+}
+
+.crm-modal__body {
+  background: #FFFFFF;
+  padding: 1.5rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* Resumo Tático de Métricas */
+.crm-tactic-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+}
+
+.crm-tactic-metric-card {
+  background: #F8FAFC;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 0.85rem;
+  text-align: center;
+}
+
+.crm-tactic-metric-card__val {
+  font-family: var(--font-condensed);
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--isapel-navy);
+}
+
+.crm-tactic-metric-card__lbl {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+/* Lista de Ações Táticas & Prioridades */
+.crm-priority-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.crm-priority-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #FFFFFF;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 1rem;
+  transition: border-color var(--transition-fast);
+}
+
+.crm-priority-item:hover {
+  border-color: var(--isapel-sky-light);
+}
+
+.crm-priority-item__info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.crm-priority-item__title {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--text-main);
+}
+
+.crm-priority-tag {
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-sm);
+  text-transform: uppercase;
+}
+
+.crm-priority-tag--alta {
+  background: #FEE2E2;
+  color: #B91C1C;
+  border: 1px solid #FECACA;
+}
+
+.crm-priority-tag--media {
+  background: #FEF3C7;
+  color: #92400E;
+  border: 1px solid #FDE68A;
+}
+
+.crm-priority-tag--estrategica {
+  background: #E0F2FE;
+  color: #0369A1;
+  border: 1px solid #BAE6FD;
+}
+
+.crm-modal__footer {
+  padding: 1rem 1.5rem;
+  background: #F8FAFC;
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+
+.crm-btn {
+  height: 38px;
+  padding: 0 1.25rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  transition: background-color var(--transition-fast), border-color var(--transition-fast), transform 70ms ease-out, box-shadow var(--transition-fast);
+  user-select: none;
+}
+
+.crm-btn:active {
+  transform: scale(0.96);
+}
+
+.crm-btn--secondary {
+  background: #FFFFFF;
+  border: 1px solid var(--border-strong);
+  color: var(--text-main);
+}
+
+.crm-btn--secondary:hover {
+  background: #F1F5F9;
+  border-color: #94A3B8;
+}
+
+.crm-btn--primary {
+  background: var(--isapel-sky);
+  color: #FFFFFF;
+  border: 1px solid transparent;
+}
+
+.crm-btn--primary:hover {
+  background: var(--isapel-sky-hover);
+}
+
+/* ==========================================================================
+   8. MICRO-ANIMAÇÕES & KEYFRAMES
+   ========================================================================== */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Transição Direcional Suave de Abas (240ms) */
+@keyframes tabFadeSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.tab-section {
+  display: none;
+}
+
+.tab-section.is-active {
+  display: block;
+  animation: tabFadeSlideIn 240ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: opacity, transform;
+}
+
+@keyframes pulseSubtle {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.65;
+    transform: scale(0.92);
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* ==========================================================================
+   9. RESPONSIVIDADE PRECISA (DESKTOP, TABLET & MOBILE)
+   ========================================================================== */
+/* Telas Grandes (Full HD 1920x1080) */
+@media (min-width: 1600px) {
+  .crm-kanban-board {
+    min-width: 100%;
+  }
+}
+
+/* Laptops Padrão (1366x768 / 1440x900) */
+@media (max-width: 1440px) {
+  .crm-arena-grid {
+    grid-template-columns: 1.4fr 1fr;
+  }
+}
+
+/* Tablets (iPad / 1024px e 768px) */
+@media (max-width: 1024px) {
+  .crm-header {
+    height: auto;
+    padding: 0.75rem 1.25rem;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+  
+  .crm-header__brand-group {
+    justify-content: space-between;
+  }
+
+  .crm-header__nav-tabs {
+    justify-content: center;
+  }
+
+  .crm-arena-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .crm-tactic-metrics {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .crm-quick-bar {
+    padding: 0.85rem 1.5rem;
+    display: flex;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0.75rem;
+  }
+
+  .crm-quick-bar > * {
+    width: 100% !important;
+    max-width: 100% !important;
+    justify-content: flex-start !important;
+  }
+
+  .crm-quick-bar__form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    width: 100% !important;
+  }
+
+  #ddd-badge-box {
+    width: 100% !important;
+    justify-content: flex-start !important;
+  }
+}
+
+/* Alvos de Toque no Mobile (WCAG 2.5.5 / 2.5.8 >= 44px) */
+@media (max-width: 768px) {
+  .crm-card__footer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .crm-card__btn-advance,
+  .crm-card__whatsapp-btn,
+  .crm-header__tab-btn,
+  .crm-quick-bar__btn-submit {
+    min-height: 44px;
+  }
+}
+
+/* Celulares (Vendedores em Rota Externa: 390x844 e menores) */
+@media (max-width: 640px) {
+  .crm-quick-bar {
+    padding: 0.75rem 1rem;
+  }
+
+  .crm-quick-bar__form {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .crm-quick-bar__btn-submit {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .crm-kanban-meta-bar {
+    padding: 0.65rem 1.25rem 0 1.25rem !important;
+  }
+
+  .crm-kanban-meta-bar > div {
+    width: 100%;
+  }
+
+  #kanban-search {
+    width: 100% !important;
+  }
+
+  .crm-kanban-wrapper {
+    padding: 0.75rem 1.25rem;
+    height: calc(100vh - 180px);
+    scroll-snap-type: x mandatory;
+    scroll-padding: 0 1.25rem;
+  }
+
+  .crm-kanban-board {
+    display: flex;
+    gap: 2rem;
+    min-width: max-content;
+  }
+
+  .crm-kanban-col {
+    width: calc(100vw - 3.5rem);
+    min-width: 300px;
+    max-width: 335px;
+    flex-shrink: 0;
+    scroll-snap-align: start;
+  }
+
+  .crm-modal {
+    max-height: 95vh;
+  }
+
+  .crm-modal__footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .crm-btn {
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+/* ==========================================================================
+   10. ACESSIBILIDADE: PREFERS-REDUCED-MOTION (WCAG 2.2 NÍVEL AAA)
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .crm-header__badge-copilot::before {
+    animation: none !important;
+  }
+
+  .tab-section.is-active {
+    animation: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+
+  .crm-modal {
+    transform: none !important;
+    animation: none !important;
+    opacity: 1 !important;
+    transition: none !important;
+  }
+
+  .crm-card:hover,
+  .crm-btn:hover,
+  .crm-closing-btn-hero:hover {
+    transform: none !important;
+  }
+
+  .crm-toast {
+    animation: none !important;
+  }
+
+  .crm-card.is-just-dropped {
+    animation: none !important;
+  }
+}
+
+
+/* ==========================================================================
+   11. ABA DE EXIBIÇÃO TOTAL & ANALYTICS DE VENDAS ISAPEL (ANTI-SLOP & WCAG AA)
+   ========================================================================== */
+
+/* Header Card e Apresentação */
+.crm-analytics-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: 1.5rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.crm-analytics-header__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.crm-analytics-header__info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  max-width: 820px;
+}
+
+.crm-analytics-title {
+  font-family: var(--font-condensed);
+  font-size: 1.85rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--isapel-navy);
+  margin: 0;
+  line-height: 1.15;
+}
+
+.crm-analytics-subtitle {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin: 0;
+  line-height: 1.45;
+}
+
+.crm-analytics-live-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-full);
+  background: rgba(5, 150, 105, 0.1);
+  color: var(--isapel-emerald-text);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  border: 1px solid rgba(5, 150, 105, 0.25);
+}
+
+.crm-analytics-live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  background: var(--isapel-emerald);
+  box-shadow: 0 0 0 0 rgba(5, 150, 105, 0.7);
+  animation: pulseEmerald 2s infinite;
+}
+
+@keyframes pulseEmerald {
+  0% {
+    box-shadow: 0 0 0 0 rgba(5, 150, 105, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(5, 150, 105, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(5, 150, 105, 0);
+  }
+}
+
+/* Barra de Filtros Dinâmicos */
+.crm-analytics-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  padding-top: 1.15rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.crm-analytics-filter-group {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.crm-analytics-filter-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.crm-analytics-select-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.crm-analytics-select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 0.5rem 2.25rem 0.5rem 0.85rem;
+  font-family: var(--font-sans);
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--text-main);
+  cursor: pointer;
+  box-shadow: var(--shadow-xs);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.crm-analytics-select:hover:not(:disabled) {
+  border-color: var(--isapel-sky);
+}
+
+.crm-analytics-select:focus-visible {
+  outline: 2px solid var(--isapel-sky);
+  outline-offset: 1px;
+  border-color: var(--isapel-sky-dark);
+}
+
+.crm-analytics-select:disabled {
+  background-color: #F1F5F9;
+  color: var(--text-muted);
+  cursor: not-allowed;
+  opacity: 0.85;
+}
+
+.crm-analytics-select-chevron {
+  position: absolute;
+  right: 0.75rem;
+  pointer-events: none;
+  color: var(--text-muted);
+}
+
+/* Pills de Período */
+.crm-analytics-pills {
+  display: inline-flex;
+  background: var(--bg-column);
+  padding: 4px;
+  border-radius: var(--radius-md);
+  gap: 4px;
+  border: 1px solid var(--border-subtle);
+}
+
+.crm-pill-btn {
+  border: none;
+  background: transparent;
+  padding: 0.45rem 0.85rem;
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: background-color var(--transition-fast), color var(--transition-fast), box-shadow var(--transition-fast);
+  white-space: nowrap;
+}
+
+.crm-pill-btn:hover:not(.is-active) {
+  color: var(--isapel-navy);
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.crm-pill-btn.is-active {
+  background: var(--isapel-navy);
+  color: #FFFFFF;
+  box-shadow: var(--shadow-xs);
+  font-weight: 700;
+}
+
+.crm-pill-btn:focus-visible {
+  outline: 2px solid var(--isapel-sky);
+  outline-offset: 1px;
+}
+
+/* Inputs de Intervalo Personalizado */
+.crm-analytics-custom-dates {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: var(--bg-column);
+  padding: 0.4rem 0.75rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+  animation: fadeIn 200ms ease;
+}
+
+.crm-date-field {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.crm-date-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  line-height: 1;
+}
+
+.crm-date-input {
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 0.35rem 0.55rem;
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  color: var(--text-main);
+  background: var(--bg-surface);
+}
+
+.crm-date-input:focus-visible {
+  outline: 2px solid var(--isapel-sky);
+  outline-offset: 1px;
+}
+
+.crm-date-separator {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  padding: 0 0.15rem;
+}
+
+/* Grade Bento de 6 KPIs */
+.crm-analytics-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 1rem;
+}
+
+@media (max-width: 1400px) {
+  .crm-analytics-kpi-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .crm-analytics-kpi-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .crm-analytics-kpi-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.crm-kpi-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1.15rem 1.25rem;
+  box-shadow: var(--shadow-xs);
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+}
+
+.crm-kpi-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: rgba(2, 132, 199, 0.35);
+}
+
+.crm-kpi-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.crm-kpi-card__lbl {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--text-muted);
+}
+
+.crm-kpi-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.crm-kpi-icon--sky {
+  background: var(--isapel-sky-soft);
+  color: var(--isapel-sky-dark);
+}
+
+.crm-kpi-icon--gold {
+  background: var(--isapel-gold-soft);
+  color: var(--isapel-gold-text);
+}
+
+.crm-kpi-icon--indigo {
+  background: var(--isapel-indigo-soft);
+  color: var(--isapel-indigo-text);
+}
+
+.crm-kpi-icon--emerald {
+  background: var(--isapel-emerald-soft);
+  color: var(--isapel-emerald-text);
+}
+
+.crm-kpi-icon--navy {
+  background: rgba(0, 51, 96, 0.08);
+  color: var(--isapel-navy);
+}
+
+.crm-kpi-icon--slate {
+  background: var(--isapel-slate-soft);
+  color: var(--isapel-slate-text);
+}
+
+.crm-kpi-card__val {
+  font-family: var(--font-condensed);
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--isapel-navy);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+.crm-kpi-card__hint {
+  font-size: 0.74rem;
+  color: var(--text-muted);
+  line-height: 1.3;
+}
+
+/* Grid de Gráficos (Funil e Equipe) */
+.crm-analytics-charts-grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 1.25rem;
+}
+
+@media (max-width: 1080px) {
+  .crm-analytics-charts-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.crm-chart-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1.35rem 1.6rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+.crm-chart-card__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 0.85rem;
+}
+
+.crm-chart-card__title-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.crm-chart-card__title {
+  font-family: var(--font-condensed);
+  font-size: 1.25rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--isapel-navy);
+  margin: 0;
+}
+
+.crm-chart-card__subtitle {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.crm-chart-card__badge {
+  font-size: 0.76rem;
+  font-weight: 700;
+  background: var(--isapel-sky-soft);
+  color: var(--isapel-sky-dark);
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+}
+
+/* Funil Visual de 6 Etapas */
+.crm-funnel-visual-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.crm-funnel-step {
+  background: var(--bg-column);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  transition: transform var(--transition-fast), border-color var(--transition-fast);
+}
+
+.crm-funnel-step:hover {
+  transform: translateX(3px);
+  border-color: rgba(2, 132, 199, 0.4);
+}
+
+.crm-funnel-step__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.crm-funnel-step__left {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.crm-funnel-step__color-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: var(--radius-full);
+  flex-shrink: 0;
+}
+
+.crm-funnel-step__title {
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.crm-funnel-step__stats {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.crm-funnel-step__count-badge {
+  font-family: var(--font-condensed);
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--isapel-navy);
+}
+
+.crm-funnel-step__pct-badge {
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-full);
+  background: rgba(2, 132, 199, 0.12);
+  color: var(--isapel-sky-dark);
+}
+
+.crm-funnel-step__track {
+  width: 100%;
+  height: 9px;
+  background: #E2E8F0;
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  position: relative;
+}
+
+.crm-funnel-step__bar {
+  height: 100%;
+  border-radius: var(--radius-full);
+  transition: width 450ms cubic-bezier(0.16, 1, 0.3, 1);
+  min-width: 4px;
+}
+
+.crm-funnel-step__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.74rem;
+  color: var(--text-muted);
+}
+
+.crm-funnel-step__val {
+  font-weight: 700;
+  color: var(--isapel-navy);
+}
+
+/* Painel de Distribuição da Equipe / Vendedor */
+.crm-seller-distribution-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.crm-seller-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 1rem;
+  border-radius: var(--radius-md);
+  background: var(--bg-column);
+  border: 1px solid var(--border-subtle);
+  gap: 0.85rem;
+  transition: transform var(--transition-fast), border-color var(--transition-fast);
+}
+
+.crm-seller-row:hover {
+  transform: translateY(-2px);
+  border-color: rgba(2, 132, 199, 0.35);
+}
+
+.crm-seller-row__left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.crm-seller-row__avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-full);
+  background: var(--isapel-navy);
+  color: #FFFFFF;
+  font-weight: 800;
+  font-size: 0.84rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: var(--shadow-xs);
+}
+
+.crm-seller-row__info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.crm-seller-row__name {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.crm-seller-row__cargo {
+  font-size: 0.74rem;
+  color: var(--text-muted);
+}
+
+.crm-seller-row__stats {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.15rem;
+}
+
+.crm-seller-row__val {
+  font-family: var(--font-condensed);
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--isapel-navy);
+}
+
+.crm-seller-row__sub {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.crm-regions-distribution-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.crm-region-row {
+  display: flex;
+  flex-direction: column;
+  padding: 0.85rem 1rem;
+  border-radius: var(--radius-md);
+  background: var(--bg-column);
+  border: 1px solid var(--border-subtle);
+  gap: 0.45rem;
+  transition: all var(--transition-fast);
+  cursor: pointer;
+}
+
+.crm-region-row:hover {
+  transform: translateY(-2px);
+  border-color: rgba(2, 132, 199, 0.4);
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.08);
+}
+
+.crm-region-row.is-selected {
+  border-color: var(--isapel-sky-dark);
+  background: rgba(2, 132, 199, 0.04);
+  box-shadow: 0 0 0 1px var(--isapel-sky-dark);
+}
+
+/* Card Scorecard Individual (Quando 1 vendedor filtrado) */
+.crm-seller-scorecard {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.crm-seller-scorecard__profile {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.75rem;
+  background: var(--bg-column);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+}
+
+.crm-seller-scorecard__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+}
+
+.crm-seller-scorecard__stat-box {
+  background: var(--bg-column);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.crm-seller-scorecard__stat-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.crm-seller-scorecard__stat-val {
+  font-family: var(--font-condensed);
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--isapel-navy);
+}
+
+/* Accordion Recolhível de Fechamento Operacional */
+.crm-accordion-wrapper {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  margin-top: 0.5rem;
+}
+
+.crm-accordion-toggle {
+  width: 100%;
+  background: linear-gradient(135deg, #F8FAFC 0%, #EDF2F7 100%);
+  border: none;
+  padding: 1.15rem 1.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  text-align: left;
+  transition: background var(--transition-fast);
+}
+
+.crm-accordion-toggle:hover {
+  background: #E2E8F0;
+}
+
+.crm-accordion-toggle:focus-visible {
+  outline: 2px solid var(--isapel-sky);
+  outline-offset: -2px;
+}
+
+.crm-accordion-toggle__left {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.crm-accordion-toggle__icon-wrap {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  background: var(--isapel-sky-soft);
+  color: var(--isapel-sky-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.crm-accordion-toggle__text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.crm-accordion-toggle__title {
+  font-family: var(--font-condensed);
+  font-size: 1.2rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--isapel-navy);
+}
+
+.crm-accordion-toggle__sub {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.crm-accordion-toggle__chevron {
+  font-size: 1.35rem;
+  color: var(--isapel-navy);
+  transition: transform var(--transition-normal);
+  display: inline-block;
+}
+
+.crm-accordion-toggle[aria-expanded="true"] .crm-accordion-toggle__chevron {
+  transform: rotate(180deg);
+}
+
+.crm-accordion-content {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  border-top: 1px solid var(--border-subtle);
+  animation: fadeIn 250ms ease;
+}
+
+/* ==========================================================================
+   14. ABA DE GESTÃO DE EQUIPE & NOVOS CONSULTORES (RESTRITA À DIRETORIA)
+   ========================================================================== */
+#tab-gestao {
+  width: 100%;
+}
+
+.crm-gestao-container {
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 1.5rem 1.75rem 3rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Header da Seção de Gestão */
+.crm-gestao-header {
+  background: linear-gradient(135deg, #FFFFFF 0%, #F8FAFC 100%);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem 1.75rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.crm-gestao-header__info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.crm-gestao-header__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--isapel-gold);
+  background: rgba(227, 165, 43, 0.12);
+  border: 1px solid rgba(227, 165, 43, 0.3);
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  width: fit-content;
+}
+
+.crm-gestao-header__title {
+  font-family: var(--font-condensed);
+  font-size: 1.65rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--isapel-navy);
+  margin: 0;
+}
+
+.crm-gestao-header__subtitle {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  margin: 0;
+  max-width: 720px;
+}
+
+/* Grid Bento: Formulário + Tabela */
+.crm-gestao-grid {
+  display: grid;
+  grid-template-columns: 440px 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+@media (max-width: 1100px) {
+  .crm-gestao-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Cards Bento de Gestão */
+.crm-gestao-card {
+  background: #FFFFFF;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.crm-gestao-card__header {
+  padding: 1.25rem 1.5rem;
+  background: linear-gradient(135deg, #F8FAFC 0%, #EDF2F7 100%);
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.crm-gestao-card__icon-wrap {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-md);
+  background: var(--isapel-sky-soft);
+  color: var(--isapel-sky-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.crm-gestao-card__title {
+  font-family: var(--font-condensed);
+  font-size: 1.15rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--isapel-navy);
+  margin: 0;
+}
+
+.crm-gestao-card__desc {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+/* Formulário de Cadastro de Vendedor */
+#form-novo-vendedor {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+.crm-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.crm-form-label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--slate-800);
+}
+
+.crm-required {
+  color: #EF4444;
+  margin-left: 2px;
+}
+
+.crm-form-input,
+.crm-form-select {
+  width: 100%;
+  height: 42px;
+  padding: 0.55rem 0.85rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  font-size: 0.88rem;
+  color: var(--slate-900);
+  background: #FFFFFF;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.crm-form-input:focus,
+.crm-form-select:focus {
+  border-color: var(--isapel-sky);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+}
+
+.crm-form-hint {
+  font-size: 0.74rem;
+  color: var(--text-muted);
+}
+
+/* Wrapper de Senha e Toggle Button */
+.crm-password-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.crm-password-input {
+  padding-right: 2.75rem;
+}
+
+.crm-password-toggle-btn {
+  position: absolute;
+  right: 0.5rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--text-muted);
+  padding: 6px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: color var(--transition-fast), background var(--transition-fast);
+}
+
+.crm-password-toggle-btn:hover {
+  color: var(--isapel-navy);
+  background: #F1F5F9;
+}
+
+.crm-password-toggle-btn:focus-visible {
+  outline: 2px solid var(--isapel-sky);
+  outline-offset: 1px;
+}
+
+.crm-gestao-form__actions {
+  margin-top: 0.65rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+#btn-cadastrar-vendedor {
+  width: 100%;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+/* Tabela de Equipe de Vendedores */
+.crm-table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
+#tabela-equipe-vendedores {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  text-align: left;
+}
+
+#tabela-equipe-vendedores th {
+  padding: 0.9rem 1.25rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  background: #F8FAFC;
+  border-bottom: 1px solid var(--border-subtle);
+  white-space: nowrap;
+}
+
+#tabela-equipe-vendedores td {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid #F1F5F9;
+  vertical-align: middle;
+  font-size: 0.88rem;
+  color: var(--slate-800);
+}
+
+#tabela-equipe-vendedores tbody tr {
+  transition: background var(--transition-fast);
+}
+
+#tabela-equipe-vendedores tbody tr:hover {
+  background: #F8FAFC;
+}
+
+#tabela-equipe-vendedores tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Célula do Vendedor */
+.crm-seller-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.crm-seller-avatar-badge {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  color: #FFFFFF;
+  font-weight: 800;
+  font-size: 0.82rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+.crm-seller-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.crm-seller-name {
+  color: var(--isapel-navy);
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.crm-seller-login {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+}
+
+/* Badge de Cargo */
+.crm-cargo-badge {
+  display: inline-block;
+  padding: 0.25rem 0.65rem;
+  border-radius: 6px;
+  background: #F1F5F9;
+  color: var(--slate-700);
+  font-size: 0.78rem;
+  font-weight: 600;
+  border: 1px solid var(--border-subtle);
+}
+
+/* Célula de Meta */
+.crm-meta-cell {
+  display: flex;
+  flex-direction: column;
+}
+
+.crm-meta-sub {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* Badge de Status Ativo */
+.crm-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.crm-status-pill--ativo {
+  background: #ECFDF5;
+  color: #059669;
+  border: 1px solid #A7F3D0;
+}
+
+.crm-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+/* ==========================================================================
+   ISAPEL PAPÉIS - 3D AVATAR CUSTOMIZER & LIVE STUDIO MODAL
+   ========================================================================== */
+
+#modal-avatar-backdrop.is-open {
+  opacity: 1;
+  visibility: visible;
+  backdrop-filter: blur(6px);
+  display: flex !important;
+}
+
+#modal-avatar-backdrop.is-open #modal-avatar-customizer {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+  visibility: visible;
+  display: flex !important;
+}
+
+.crm-modal--avatar {
+  max-width: 960px;
+  width: 95vw;
+  max-height: 92vh;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 25px 50px -12px rgba(0, 34, 68, 0.35);
+  background: #FFFFFF;
+  border: 1px solid rgba(2, 132, 199, 0.3);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.crm-modal__subtitle {
+  font-size: 0.8rem;
+  color: #93C5FD;
+  margin-top: 2px;
+  font-weight: 500;
+}
+
+.crm-avatar-split-view {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  min-height: 480px;
+  max-height: calc(90vh - 140px);
+  overflow: hidden;
+  background: #FFFFFF;
+}
+
+/* Stage do Canvas 3D */
+.crm-avatar-stage-panel {
+  background: radial-gradient(circle at 50% 30%, #0B2545 0%, #001A33 70%, #000E1C 100%);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem;
+  border-right: 1px solid rgba(2, 132, 199, 0.2);
+  overflow: hidden;
+}
+
+.crm-avatar-stage-canvas-wrap {
+  position: relative;
+  width: 100%;
+  flex: 1;
+  min-height: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#avatar-preview-canvas {
+  width: 100% !important;
+  height: 100% !important;
+  min-width: 240px;
+  min-height: 360px;
+  display: block;
+  outline: none;
+  cursor: grab;
+  touch-action: none;
+}
+
+#avatar-preview-canvas:active {
+  cursor: grabbing;
+}
+
+.crm-avatar-drag-hint {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 34, 68, 0.85);
+  backdrop-filter: blur(6px);
+  color: #BAE6FD;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  padding: 5px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.crm-avatar-stage-meta {
+  width: 100%;
+  margin-top: 8px;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+}
+
+.crm-avatar-stage-meta__text {
+  font-size: 0.75rem;
+  color: #94A3B8;
+  font-weight: 500;
+}
+
+/* Painel de Controles Bento */
+.crm-avatar-controls-panel {
+  background: #F8FAFC;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.crm-avatar-controls-scroll {
+  padding: 1.25rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.crm-avatar-bento-card {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 1px 3px rgba(0, 51, 96, 0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.crm-avatar-bento-card:hover {
+  border-color: #CBD5E1;
+  box-shadow: 0 2px 6px rgba(0, 51, 96, 0.06);
+}
+
+.crm-avatar-bento-card__title {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--isapel-navy);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.crm-avatar-bento-card__sublabel {
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: #64748B;
+  margin-bottom: 2px;
+}
+
+.crm-seller-select-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+#avatar-custom-seller-select {
+  width: 100%;
+  padding: 0.6rem 0.85rem;
+  border: 1px solid #CBD5E1;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #0F172A;
+  background: #FFFFFF;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+#avatar-custom-seller-select:focus {
+  border-color: #0284C7;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+}
+
+#avatar-custom-seller-select:disabled {
+  background: #F1F5F9;
+  color: #64748B;
+  cursor: not-allowed;
+  opacity: 0.85;
+}
+
+#avatar-seller-locked-name {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: #E0F2FE;
+  color: #0369A1;
+  font-size: 0.78rem;
+  font-weight: 700;
+  border: 1px solid rgba(2, 132, 199, 0.3);
+  margin-top: 4px;
+}
+
+/* Swatches de Uniforme */
+.crm-uniforme-swatches {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.65rem;
+}
+
+.crm-uniforme-swatch-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 0.75rem 0.5rem;
+  border: 2px solid #E2E8F0;
+  border-radius: 10px;
+  background: #FFFFFF;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  text-align: center;
+}
+
+.crm-uniforme-swatch-btn:hover {
+  border-color: #38BDF8;
+  background: #F0F9FF;
+  transform: translateY(-1px);
+}
+
+.crm-uniforme-swatch-btn.is-selected,
+.crm-uniforme-swatch-btn.active {
+  border-color: #0284C7;
+  background: #E0F2FE;
+  box-shadow: 0 0 0 2px rgba(2, 132, 199, 0.3);
+}
+
+.crm-uniforme-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.2), 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.crm-uniforme-icon--marinho {
+  background: #003360;
+}
+
+.crm-uniforme-icon--sky {
+  background: #0284C7;
+}
+
+.crm-uniforme-icon--social {
+  background: linear-gradient(135deg, #FFFFFF 60%, #E3A52B 100%);
+  border: 1px solid #CBD5E1;
+}
+
+.crm-uniforme-swatch-btn span {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #0F172A;
+  line-height: 1.2;
+}
+
+/* Swatches de Cor (Pele, Cabelo, Barba) */
+.crm-swatch-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.crm-color-swatch {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid #FFFFFF;
+  box-shadow: 0 0 0 1px #CBD5E1, 0 1px 2px rgba(0,0,0,0.1);
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.15s, box-shadow 0.15s;
+  outline: none;
+}
+
+.crm-color-swatch:hover {
+  transform: scale(1.15);
+  box-shadow: 0 0 0 2px #0284C7;
+}
+
+.crm-color-swatch.is-selected,
+.crm-color-swatch.active {
+  transform: scale(1.18);
+  box-shadow: 0 0 0 3px #0284C7, 0 2px 6px rgba(0, 51, 96, 0.3);
+}
+
+/* Checkboxes Elegantes */
+.crm-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #1E293B;
+  user-select: none;
+}
+
+.crm-checkbox-label input[type="checkbox"] {
+  width: 17px;
+  height: 17px;
+  accent-color: #0284C7;
+  cursor: pointer;
+}
+
+/* Botão na Tabela de Vendedores */
+.crm-btn-avatar-mini,
+.btn-customizar-avatar-tabela {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  border-radius: 6px;
+  border: 1px solid #0284C7;
+  color: #0284C7;
+  background: #F0F9FF;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.crm-btn-avatar-mini:hover,
+.btn-customizar-avatar-tabela:hover {
+  background: #0284C7;
+  color: #FFFFFF;
+  box-shadow: 0 2px 4px rgba(2, 132, 199, 0.2);
+}
+
+/* Responsividade Mobile / Tablet */
+@media (max-width: 860px) {
+  .crm-avatar-split-view {
+    grid-template-columns: 1fr;
+    max-height: 75vh;
+    overflow-y: auto;
+  }
+  .crm-avatar-stage-panel {
+    border-right: none;
+    border-bottom: 1px solid rgba(2, 132, 199, 0.2);
+    min-height: 320px;
+  }
+  .crm-avatar-stage-canvas-wrap {
+    min-height: 300px;
+  }
+}
+
+/* ==========================================================================
+   RELATÓRIO GERENCIAL DE LEADS (DESIGN IDÊNTICO AO PRINT EXECUTIVO)
+   ========================================================================== */
+.crm-gerencial-report {
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 31, 63, 0.06);
+  margin-bottom: 1.5rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* Barra Superior Escura */
+.crm-gerencial-topbar {
+  background: #001F3F;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 24px;
+  min-height: 50px;
+}
+
+.crm-gerencial-topbar__left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.crm-gerencial-topbar__badge {
+  background: #FFFFFF;
+  border-radius: 6px;
+  padding: 3px 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  line-height: 1;
+}
+
+.crm-gerencial-logo-text {
+  color: #003360;
+  font-weight: 800;
+  font-size: 1.05rem;
+  letter-spacing: -0.5px;
+}
+
+.crm-gerencial-logo-leaf {
+  font-size: 0.85rem;
+}
+
+.crm-gerencial-topbar__brand {
+  color: #FFFFFF;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.8px;
+}
+
+.crm-gerencial-topbar__right {
+  color: #CBD5E1;
+  font-size: 0.82rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Botão de Captura de Foto na Barra Superior Escura */
+.crm-gerencial-btn-foto {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(16, 185, 129, 0.18);
+  color: #34D399;
+  border: 1px solid rgba(52, 211, 153, 0.4);
+  border-radius: 6px;
+  padding: 5px 12px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.crm-gerencial-btn-foto:hover {
+  background: #10B981;
+  color: #FFFFFF;
+  border-color: #10B981;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.35);
+  transform: translateY(-1px);
+}
+
+.crm-gerencial-btn-foto:active {
+  transform: translateY(0);
+}
+
+/* Botão de Foto na Linha de Filtros do Relatório */
+.crm-gerencial-btn-foto-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #001F3F;
+  color: #FFFFFF;
+  border: 1px solid #001F3F;
+  border-radius: 8px;
+  padding: 0 14px;
+  height: 34px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.crm-gerencial-btn-foto-action:hover {
+  background: #0A3663;
+  border-color: #0A3663;
+  box-shadow: 0 2px 8px rgba(0, 31, 63, 0.25);
+  transform: translateY(-1px);
+}
+
+.crm-gerencial-btn-foto-action:active {
+  transform: translateY(0);
+}
+
+/* Corpo Principal */
+.crm-gerencial-body {
+  padding: 22px 24px 26px 24px;
+}
+
+/* Cabeçalho do Relatório e Filtros */
+.crm-gerencial-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.crm-gerencial-title-group {
+  display: flex;
+  align-items: stretch;
+  gap: 12px;
+}
+
+.crm-gerencial-title-bar {
+  width: 4px;
+  background: #10B981;
+  border-radius: 2px;
+  flex-shrink: 0;
+  min-height: 44px;
+}
+
+.crm-gerencial-title-texts {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.crm-gerencial-title {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #001F3F;
+  letter-spacing: 0.4px;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.crm-gerencial-subtitle {
+  font-size: 0.82rem;
+  color: #64748B;
+  margin: 3px 0 0 0;
+  font-weight: 400;
+}
+
+/* Filtros Superiores */
+.crm-gerencial-filters {
+  display: flex;
+  gap: 14px;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+/* Bloco de Data Personalizada (De / Até) */
+.crm-gerencial-custom-dates {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  background: #F8FAFC;
+  padding: 4px 8px;
+  border-radius: 8px;
+  border: 1px dashed #CBD5E1;
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+.crm-gerencial-date-group {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.crm-gerencial-date-input {
+  background: #FFFFFF;
+  border: 1px solid #CBD5E1;
+  border-radius: 6px;
+  padding: 0 8px;
+  height: 32px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #0F172A;
+  outline: none;
+  font-family: inherit;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.crm-gerencial-date-input:focus {
+  border-color: #10B981;
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+}
+
+.crm-gerencial-btn-aplicar-data {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #10B981;
+  color: #FFFFFF;
+  border: 1px solid #10B981;
+  border-radius: 6px;
+  height: 32px;
+  padding: 0 12px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  box-shadow: 0 1px 2px rgba(16, 185, 129, 0.2);
+}
+
+.crm-gerencial-btn-aplicar-data:hover {
+  background: #059669;
+  border-color: #059669;
+  box-shadow: 0 2px 6px rgba(5, 150, 105, 0.3);
+  transform: translateY(-1px);
+}
+
+.crm-gerencial-btn-aplicar-data:active {
+  transform: translateY(0);
+}
+
+.crm-gerencial-filter-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.crm-gerencial-filter-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #334155;
+}
+
+.crm-gerencial-select-box {
+  position: relative;
+  background: #FFFFFF;
+  border: 1px solid #CBD5E1;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  height: 34px;
+  min-width: 130px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.crm-gerencial-filter-icon {
+  font-size: 0.85rem;
+  margin-right: 6px;
+}
+
+.crm-gerencial-select {
+  appearance: none;
+  border: none;
+  background: transparent;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: #0F172A;
+  outline: none;
+  cursor: pointer;
+  padding-right: 18px;
+  width: 100%;
+}
+
+.crm-gerencial-chevron {
+  position: absolute;
+  right: 10px;
+  pointer-events: none;
+  color: #64748B;
+  font-size: 0.85rem;
+}
+
+/* Linha da Coorte */
+.crm-gerencial-coorte-row {
+  font-size: 0.84rem;
+  color: #334155;
+  font-weight: 500;
+  margin: 14px 0 18px 0;
+  display: flex;
+  align-items: center;
+}
+
+.crm-gerencial-coorte-row strong {
+  font-weight: 700;
+  color: #0F172A;
+  margin-left: 4px;
+}
+
+/* 4 Cards de KPIs Executivos */
+.crm-gerencial-kpi-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.crm-gerencial-kpi-card {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 10px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+}
+
+.crm-gerencial-kpi-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.crm-gerencial-kpi-icon--green {
+  background: #ECFDF5;
+  color: #10B981;
+}
+
+.crm-gerencial-kpi-icon--amber {
+  background: #FEF3C7;
+  color: #D97706;
+}
+
+.crm-gerencial-kpi-icon--slate {
+  background: #F1F5F9;
+  color: #64748B;
+}
+
+.crm-gerencial-kpi-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.crm-gerencial-kpi-label {
+  font-size: 0.76rem;
+  color: #475569;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.crm-gerencial-kpi-val {
+  font-size: 1.7rem;
+  font-weight: 800;
+  color: #0F172A;
+  line-height: 1.1;
+}
+
+.crm-gerencial-kpi-val-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.crm-gerencial-kpi-divider {
+  color: #CBD5E1;
+  font-weight: 300;
+  font-size: 1.1rem;
+}
+
+.crm-gerencial-kpi-badge {
+  padding: 2px 7px;
+  border-radius: 9999px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.crm-gerencial-kpi-badge--green {
+  background: #D1FAE5;
+  color: #065F46;
+}
+
+.crm-gerencial-kpi-badge--amber {
+  background: #FEF3C7;
+  color: #92400E;
+}
+
+.crm-gerencial-kpi-sub {
+  font-size: 0.72rem;
+  color: #94A3B8;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* Cards Bento Internos */
+.crm-gerencial-grid-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.crm-gerencial-card {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 10px;
+  padding: 14px 18px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+}
+
+.crm-gerencial-card--full {
+  margin-bottom: 14px;
+}
+
+.crm-gerencial-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.crm-gerencial-card__title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.crm-gerencial-card__icon--green {
+  color: #10B981;
+  display: inline-flex;
+}
+
+.crm-gerencial-card__title {
+  font-size: 0.84rem;
+  font-weight: 800;
+  color: #0F172A;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.crm-gerencial-badge-pill {
+  background: #F1F5F9;
+  border: 1px solid #E2E8F0;
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-size: 0.72rem;
+  color: #64748B;
+  font-weight: 500;
+}
+
+.crm-gerencial-card__subtext {
+  font-size: 0.72rem;
+  color: #64748B;
+  font-style: italic;
+}
+
+/* Tabelas Gerenciais */
+.crm-gerencial-table-wrap {
+  overflow-x: auto;
+}
+
+.crm-gerencial-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+}
+
+.crm-gerencial-table th {
+  color: #64748B;
+  font-weight: 600;
+  font-size: 0.74rem;
+  padding: 6px 10px;
+  border-bottom: 1px solid #E2E8F0;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.crm-gerencial-table th:first-child {
+  text-align: left;
+}
+
+.crm-gerencial-table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid #F1F5F9;
+  color: #334155;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.crm-gerencial-table td:first-child {
+  text-align: left;
+  font-weight: 500;
+  color: #0F172A;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Indicadores de Cor das Tabelas */
+.crm-gdot {
+  width: 9px;
+  height: 9px;
+  border-radius: 2px;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.crm-gdot--green {
+  background: #529E72;
+}
+
+.crm-gdot--amber {
+  background: #F59E0B;
+}
+
+.crm-gdot--blue {
+  background: #0284C7;
+}
+
+.crm-gdot--gray {
+  background: #94A3B8;
+}
+
+.crm-gdot--red {
+  background: #EF4444;
+}
+
+.crm-gdot--purple {
+  background: #8B5CF6;
+}
+
+.crm-gdot--teal {
+  background: #0D9488;
+}
+
+/* Célula aprimorada de Leads nas Tabelas Gerenciais (Barra + Número + Porcentagem) */
+.crm-lead-metric-cell {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  width: 100%;
+}
+
+.crm-lead-metric-stat {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 3px;
+  font-size: 0.8125rem;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.crm-lead-metric-num {
+  font-weight: 700;
+  color: #0F172A;
+}
+
+.crm-lead-metric-pct {
+  font-size: 0.74rem;
+  font-weight: 500;
+  color: #64748B;
+}
+
+.crm-lead-metric-track {
+  width: 48px;
+  height: 6px;
+  background-color: #E2E8F0;
+  border-radius: 3px;
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+.crm-lead-metric-bar {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.crm-lead-metric-bar--green {
+  background-color: #529E72;
+}
+
+.crm-lead-metric-bar--amber {
+  background-color: #F59E0B;
+}
+
+.crm-lead-metric-bar--blue {
+  background-color: #0284C7;
+}
+
+.crm-lead-metric-bar--gray {
+  background-color: #94A3B8;
+}
+
+.crm-lead-metric-bar--red {
+  background-color: #EF4444;
+}
+
+.crm-lead-metric-bar--purple {
+  background-color: #8B5CF6;
+}
+
+.crm-lead-metric-bar--teal {
+  background-color: #0D9488;
+}
+
+/* Mini barras legadas de Leads na Tabela */
+.crm-mini-bar {
+  display: inline-block;
+  height: 6px;
+  border-radius: 3px;
+  vertical-align: middle;
+}
+
+.crm-mini-bar--green {
+  background: #529E72;
+  width: 36px;
+}
+
+.crm-mini-bar--amber {
+  background: #F59E0B;
+  width: 28px;
+}
+
+.crm-mini-bar--blue {
+  background: #0284C7;
+  width: 28px;
+}
+
+.crm-mini-bar--gray {
+  background: #94A3B8;
+  width: 22px;
+}
+
+.crm-mini-bar--red {
+  background: #EF4444;
+  width: 30px;
+}
+
+/* Aproveitamento dos Leads (Barras Horizontais) */
+.crm-gerencial-aproveitamento-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 4px;
+}
+
+.crm-aprov-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.crm-aprov-lbl {
+  font-size: 0.82rem;
+  color: #334155;
+  font-weight: 500;
+  min-width: 110px;
+}
+
+.crm-aprov-bar-track {
+  flex: 1;
+  height: 13px;
+  background: #E2E8F0;
+  border-radius: 4px;
+  margin: 0 16px;
+  overflow: hidden;
+}
+
+.crm-aprov-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.35s ease;
+}
+
+.crm-aprov-bar-fill--green {
+  background: #529E72;
+}
+
+.crm-aprov-bar-fill--amber {
+  background: #D97706;
+}
+
+.crm-aprov-val {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #0F172A;
+  min-width: 80px;
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* Rodapé Informativo */
+.crm-gerencial-footer {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  color: #64748B;
+  font-style: italic;
+  margin-top: 14px;
+}
+
+.crm-gerencial-footer-icon {
+  font-style: normal;
+  font-size: 0.85rem;
+}
+
+/* Responsividade Mobile / Tablet do Relatório Gerencial */
+@media (max-width: 1100px) {
+  .crm-gerencial-kpi-row {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .crm-gerencial-kpi-row {
+    grid-template-columns: 1fr 1fr;
+  }
+  .crm-gerencial-grid-2col {
+    grid-template-columns: 1fr;
+  }
+  .crm-gerencial-header-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .crm-gerencial-filters {
+    width: 100%;
+    justify-content: flex-start;
+  }
+  .crm-gerencial-filter-item {
+    flex: 1;
+    min-width: 120px;
+  }
+}
