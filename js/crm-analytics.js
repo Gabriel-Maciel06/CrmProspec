@@ -44,6 +44,13 @@
       avatar: 'DA',
       cargo: 'Prospector Comercial B2B',
       cor: '#059669'
+    },
+    mikaela: {
+      id: 'mikaela',
+      nome: 'Mikaela',
+      avatar: 'MI',
+      cargo: 'Prospectora Comercial B2B',
+      cor: '#0284C7'
     }
   };
 

@@ -301,7 +301,7 @@
     if (sessaoAtiva && sessaoAtiva.perfil === 'vendedor' && sessaoAtiva.vendedorId) {
       vendedorId = sessaoAtiva.vendedorId;
     } else if (vendedorId === 'todos') {
-      const vendedores = ['maciel', 'daniel'];
+      const vendedores = ['maciel', 'daniel', 'mikaela'];
       const index = Math.floor(Math.random() * vendedores.length);
       vendedorId = vendedores[index];
     }
@@ -737,8 +737,8 @@
     card.setAttribute('data-stage', lead.estagio);
 
     // Vendedor Info
-    const nomesMap = { maciel: 'Maciel', daniel: 'Daniel' };
-    const iniciaisMap = { maciel: 'GM', daniel: 'DA' };
+    const nomesMap = { maciel: 'Maciel', daniel: 'Daniel', mikaela: 'Mikaela' };
+    const iniciaisMap = { maciel: 'GM', daniel: 'DA', mikaela: 'MI' };
     const sellerName = nomesMap[lead.vendedorId] || (lead.vendedorId ? lead.vendedorId.toUpperCase() : 'Maciel');
     const sellerInitials = iniciaisMap[lead.vendedorId] || (lead.vendedorId ? lead.vendedorId.substring(0, 2).toUpperCase() : 'GM');
 
@@ -1095,6 +1095,7 @@
       if (avatar) {
         if (AppState.vendedorAtivo === 'maciel') avatar.textContent = 'GM';
         else if (AppState.vendedorAtivo === 'daniel') avatar.textContent = 'DA';
+        else if (AppState.vendedorAtivo === 'mikaela') avatar.textContent = 'MI';
         else avatar.textContent = 'ALL';
       }
 

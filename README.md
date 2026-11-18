@@ -13,6 +13,7 @@ CRM B2B dedicado à gestão de prospecções comerciais, com Funil Kanban, Arena
 
 - `maciel` — Gabriel Maciel
 - `daniel` — Daniel
+- `mikaela` — Mikaela
 
 *(Sem painel ou perfil de Diretoria — cada prospector opera sua própria carteira de prospecções.)*
 

@@ -51,6 +51,20 @@
       metaMensalFardos: 2000,
       metaMensalReais: 45000,
       senhasValidas: ['daniel123', 'Daniel123', 'Daniel123!', 'daniel123!']
+    },
+    mikaela: {
+      id: 'mikaela',
+      usuario: 'mikaela',
+      nome: 'Mikaela',
+      perfil: 'vendedor',
+      vendedorId: 'mikaela',
+      cargo: 'Prospectora Comercial B2B',
+      avatar: 'MI',
+      avatarIniciais: 'MI',
+      avatarCor: '#0284C7',
+      metaMensalFardos: 2000,
+      metaMensalReais: 45000,
+      senhasValidas: ['mikaela123', 'Mikaela123']
     }
   };
 

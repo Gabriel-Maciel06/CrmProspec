@@ -884,6 +884,17 @@
       especialidade: 'Prospecção e Atendimento Regional',
       email: 'daniel@crmprospec.local',
       metaMensalFardos: 2000
+    },
+    mikaela: {
+      id: 'mikaela',
+      nome: 'Mikaela',
+      cargo: 'Prospectora Comercial B2B',
+      idade: 24,
+      perfil: 'Prospectora Comercial B2B',
+      avatarColor: '#0284C7',
+      especialidade: 'Prospecção Ativa B2B',
+      email: 'mikaela@crmprospec.local',
+      metaMensalFardos: 2000
     }
   };
 

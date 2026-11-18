@@ -114,6 +114,7 @@
     let vendedorNome = lead.vendedorNome;
     if (!vendedorNome) {
       if (lead.vendedorId === 'daniel') vendedorNome = 'Daniel';
+      else if (lead.vendedorId === 'mikaela') vendedorNome = 'Mikaela';
       else vendedorNome = 'Gabriel Maciel';
     }
 
