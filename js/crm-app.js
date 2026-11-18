@@ -343,7 +343,7 @@
   }
 
   function criarLeadAutonomo(nome, telefone, vendedorId) {
-    const leadsSalvos = JSON.parse(localStorage.getItem('isapel_crm_leads_v1') || '[]');
+    const leadsSalvos = JSON.parse(localStorage.getItem('crm_prospec_leads_v1') || '[]');
     const digits = extrairApenasDigitos(telefone);
     const ddd = parseInt(digits.slice(0, 2), 10) || 11;
     const infoDDD = resolverDDDFallback(ddd);
@@ -380,7 +380,7 @@
     };
 
     leadsSalvos.unshift(novoLead);
-    localStorage.setItem('isapel_crm_leads_v1', JSON.stringify(leadsSalvos));
+    localStorage.setItem('crm_prospec_leads_v1', JSON.stringify(leadsSalvos));
     return novoLead;
   }
 
@@ -393,7 +393,7 @@
     if (window.IsapelCRM && typeof window.IsapelCRM.listarLeads === 'function') {
       return window.IsapelCRM.listarLeads() || [];
     }
-    return JSON.parse(localStorage.getItem('isapel_crm_leads_v1') || '[]');
+    return JSON.parse(localStorage.getItem('crm_prospec_leads_v1') || '[]');
   }
 
   function renderizarKanban() {
@@ -608,7 +608,7 @@
         lead.tipoCliente = novoTipo;
         lead.dataAtualizacao = new Date().toISOString();
         lead._tsLocal = Date.now();
-        localStorage.setItem('isapel_crm_leads_v1', JSON.stringify(todos));
+        localStorage.setItem('crm_prospec_leads_v1', JSON.stringify(todos));
         leadAtualizado = lead;
       }
     }
@@ -951,7 +951,7 @@
         lead.dataUltimoContato = agora;
         lead.dataAtualizacao = agora;
         lead._tsLocal = Date.now();
-        localStorage.setItem('isapel_crm_leads_v1', JSON.stringify(todos));
+        localStorage.setItem('crm_prospec_leads_v1', JSON.stringify(todos));
         leadAtualizado = lead;
       }
     }
@@ -2542,7 +2542,7 @@
         });
         lead.observacoes = texto;
         lead.dataUltimoContato = new Date().toISOString();
-        localStorage.setItem('isapel_crm_leads_v1', JSON.stringify(todos));
+        localStorage.setItem('crm_prospec_leads_v1', JSON.stringify(todos));
         leadAtualizado = lead;
       }
     }
@@ -2717,7 +2717,7 @@
           lead.dataCadastro = novaDataIsoCompleta;
           lead.dataCriacao = novaDataIsoCompleta;
         }
-        localStorage.setItem('isapel_crm_leads_v1', JSON.stringify(todos));
+        localStorage.setItem('crm_prospec_leads_v1', JSON.stringify(todos));
         leadAtualizado = lead;
       }
     }
@@ -2744,7 +2744,7 @@
       } else {
         let todos = obterTodosOsLeads();
         todos = todos.filter(l => l.id !== idParaExcluir);
-        localStorage.setItem('isapel_crm_leads_v1', JSON.stringify(todos));
+        localStorage.setItem('crm_prospec_leads_v1', JSON.stringify(todos));
       }
 
       // Sincronizar exclusão na Nuvem (Supabase)
@@ -3100,7 +3100,7 @@
     }
 
     // Escuta evento global disparado por crm-auth.js ou sincronização externa
-    window.addEventListener('isapel:vendedor-cadastrado', () => {
+    window.addEventListener('prospec:vendedor-cadastrado', () => {
       renderizarTabelaVendedores();
       atualizarSeletoresVendedores();
     });
@@ -3115,7 +3115,7 @@
 
     // 1. Tentar obter do localStorage se foi salvo na revisão v3
     try {
-      const chaves = ['isapel_crm_avatar_profiles', 'isapel_avatar_customizations', 'isapel_vendedores_custom_v1'];
+      const chaves = ['crm_prospec_avatar_profiles', 'crm_prospec_avatar_customizations', 'crm_prospec_vendedores_custom'];
       for (const k of chaves) {
         const raw = localStorage.getItem(k);
         if (raw) {
@@ -3378,20 +3378,20 @@
 
     // 2. Persistir rigorosamente no localStorage
     try {
-      const raw1 = localStorage.getItem('isapel_crm_avatar_profiles');
+      const raw1 = localStorage.getItem('crm_prospec_avatar_profiles');
       const p1 = raw1 ? JSON.parse(raw1) : {};
       p1[vid] = configParaSalvar;
-      localStorage.setItem('isapel_crm_avatar_profiles', JSON.stringify(p1));
+      localStorage.setItem('crm_prospec_avatar_profiles', JSON.stringify(p1));
 
-      const raw2 = localStorage.getItem('isapel_avatar_customizations');
+      const raw2 = localStorage.getItem('crm_prospec_avatar_customizations');
       const p2 = raw2 ? JSON.parse(raw2) : {};
       p2[vid] = configParaSalvar;
-      localStorage.setItem('isapel_avatar_customizations', JSON.stringify(p2));
+      localStorage.setItem('crm_prospec_avatar_customizations', JSON.stringify(p2));
 
-      const raw3 = localStorage.getItem('isapel_vendedores_custom_v1');
+      const raw3 = localStorage.getItem('crm_prospec_vendedores_custom');
       const p3 = raw3 ? JSON.parse(raw3) : {};
       p3[vid] = configParaSalvar;
-      localStorage.setItem('isapel_vendedores_custom_v1', JSON.stringify(p3));
+      localStorage.setItem('crm_prospec_vendedores_custom', JSON.stringify(p3));
     } catch (err) {
       console.warn('[AvatarCustomizer] Erro ao salvar storage:', err);
     }
@@ -3402,7 +3402,7 @@
     }
 
     // 4. Disparar evento para qualquer listener ativo
-    window.dispatchEvent(new CustomEvent('isapel:avatar-updated', {
+    window.dispatchEvent(new CustomEvent('prospec:avatar-updated', {
       detail: { vendedorId: vid, config: configParaSalvar }
     }));
 

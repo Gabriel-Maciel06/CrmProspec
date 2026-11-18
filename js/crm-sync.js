@@ -562,11 +562,11 @@
     if (typeof window !== 'undefined' && typeof window.dispatchEvent === 'function') {
       try {
         const evt = (typeof CustomEvent === 'function')
-          ? new CustomEvent('isapel:avatar-updated', { detail: { vendedorId: vid, config: perfis[vid] } })
-          : { type: 'isapel:avatar-updated', detail: { vendedorId: vid, config: perfis[vid] } };
+          ? new CustomEvent('prospec:avatar-updated', { detail: { vendedorId: vid, config: perfis[vid] } })
+          : { type: 'prospec:avatar-updated', detail: { vendedorId: vid, config: perfis[vid] } };
         window.dispatchEvent(evt);
       } catch (evtErr) {
-        console.warn('[IsapelSync] Falha ao emitir isapel:avatar-updated:', evtErr);
+        console.warn('[IsapelSync] Falha ao emitir prospec:avatar-updated:', evtErr);
       }
     }
 

@@ -238,7 +238,7 @@
     // 2. Tentar ler do localStorage do navegador
     try {
       if (typeof localStorage !== 'undefined') {
-        const dadosCrm = localStorage.getItem('isapel_crm_leads_v1');
+        const dadosCrm = localStorage.getItem('crm_prospec_leads_v1');
         if (dadosCrm) {
           const parsed = JSON.parse(dadosCrm);
           if (Array.isArray(parsed) && parsed.length > 0) {
@@ -246,7 +246,7 @@
           }
         }
 
-        const dadosLeads = localStorage.getItem('isapel_leads_v1');
+        const dadosLeads = localStorage.getItem('crm_prospec_leads_v1');
         if (dadosLeads) {
           const parsed = JSON.parse(dadosLeads);
           if (Array.isArray(parsed) && parsed.length > 0) {

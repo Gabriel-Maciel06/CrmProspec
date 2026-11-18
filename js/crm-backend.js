@@ -949,7 +949,7 @@
 
   // Ouvinte global para atualização instantânea quando um novo vendedor for cadastrado
   if (typeof window !== 'undefined' && typeof window.addEventListener === 'function') {
-    window.addEventListener('isapel:vendedor-cadastrado', function (evt) {
+    window.addEventListener('prospec:vendedor-cadastrado', function (evt) {
       if (evt && evt.detail) {
         registrarVendedorDinamico(evt.detail);
       }
@@ -1173,7 +1173,7 @@
    * 1. Nunca remove leads locais que ainda não foram sincronizados na nuvem (ex: cadastros recentes ou offline).
    * 2. Preserva tipoCliente local se o registro remoto vier sem essa classificação.
    * 3. Preserva estágio, valores e notas locais caso o lead local tenha atualização mais recente ou pendência de sync.
-   * 4. Persiste o conjunto consolidado em memoriaLeads e localStorage (chave 'isapel_crm_leads_v1').
+   * 4. Persiste o conjunto consolidado em memoriaLeads e localStorage (chave 'crm_prospec_leads_v1').
    */
   function mesclarLeadsNuvem(novosLeads) {
     if (!Array.isArray(novosLeads)) {
