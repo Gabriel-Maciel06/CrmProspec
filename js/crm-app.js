@@ -687,6 +687,48 @@
     };
   }
 
+  function obterInfoUltimoContato(lead) {
+    let raw = lead && (lead.dataUltimoContato || lead.dataAtualizacao || lead.data_atualizacao);
+    const historico = (lead && (lead.historico || lead.historicoContatos)) || [];
+    if (!raw && Array.isArray(historico) && historico.length > 0) {
+      const ultItem = historico[historico.length - 1];
+      raw = ultItem && (ultItem.data || ultItem.createdAt);
+    }
+    if (!raw) {
+      raw = lead && (lead.dataContatoInicial || lead.dataCadastro || lead.data_cadastro || lead.dataCriacao || lead.criadoEm);
+    }
+
+    if (!raw) {
+      return { dataBr: 'Sem data', textoCurto: 'Último contato: —', textoCompleto: 'Data do último contato não registrada' };
+    }
+
+    const matchYmd = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(raw).trim());
+    const dt = matchYmd
+      ? new Date(Number(matchYmd[1]), Number(matchYmd[2]) - 1, Number(matchYmd[3]), 12, 0, 0)
+      : new Date(raw);
+
+    if (isNaN(dt.getTime())) {
+      return { dataBr: 'Sem data', textoCurto: 'Último contato: —', textoCompleto: 'Data do último contato inválida' };
+    }
+
+    const hoje = new Date();
+    const d0 = new Date(dt.getFullYear(), dt.getMonth(), dt.getDate());
+    const d1 = new Date(hoje.getFullYear(), hoje.getMonth(), hoje.getDate());
+    const dias = Math.max(0, Math.round((d1.getTime() - d0.getTime()) / 86400000));
+    const dia = String(dt.getDate()).padStart(2, '0');
+    const mes = String(dt.getMonth() + 1).padStart(2, '0');
+    const ano = dt.getFullYear();
+    const dataBr = `${dia}/${mes}/${ano}`;
+    const sufixo = dias === 0 ? 'hoje' : (dias === 1 ? 'ontem' : `há ${dias}d`);
+
+    return {
+      dataBr,
+      dias,
+      textoCurto: `Último contato: ${dataBr}`,
+      textoCompleto: `Último contato em ${dataBr} (${sufixo})`
+    };
+  }
+
   function criarCardElement(lead) {
     const card = document.createElement('div');
     card.className = 'crm-card';
@@ -715,7 +757,7 @@
     if (!waPhone.startsWith('55') && waPhone.length >= 10) {
       waPhone = `55${waPhone}`;
     }
-    const waText = encodeURIComponent(`Olá ${lead.contatoNome || lead.nome}, aqui é ${sellerName} da Isapel Papéis! Gostaria de conversar sobre nossa linha de papéis institucionais.`);
+    const waText = encodeURIComponent(`Olá ${lead.contatoNome || lead.nome}, aqui é ${sellerName}! Gostaria de conversar sobre uma parceria comercial.`);
     const waLink = `https://wa.me/${waPhone}?text=${waText}`;
 
     // Última Anotação
@@ -736,6 +778,7 @@
     else if (cidadeCurta.length > 14) cidadeCurta = cidadeCurta.slice(0, 13) + '…';
 
     const contatoInfo = obterInfoContatoInicial(lead);
+    const ultimoContatoInfo = obterInfoUltimoContato(lead);
 
     card.innerHTML = `
       <div class="crm-card__top">
@@ -762,12 +805,16 @@
         </a>
       </div>
 
-      <div class="crm-card__metrics-row">
+      <div class="crm-card__metrics-row" style="flex-wrap: wrap; gap: 0.35rem;">
         <span class="crm-card__days-badge crm-card__days-badge--${contatoInfo.faixa}" title="${contatoInfo.textoCompleto}">
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
           <span>${contatoInfo.textoCurto}</span>
         </span>
         <strong class="crm-card__value-text">${formatarMoeda(lead.valorProposta || 0)}</strong>
+      </div>
+      <div class="crm-card__last-contact-row" style="margin-top: 0.3rem; margin-bottom: 0.35rem; font-size: 0.72rem; color: var(--text-muted); display: flex; align-items: center; gap: 0.3rem;" title="${ultimoContatoInfo.textoCompleto}">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        <span>${ultimoContatoInfo.textoCurto}</span>
       </div>
 
       <div class="crm-card__notes-snippet" title="${ultimaNota}">
@@ -1009,13 +1056,7 @@
     });
 
     // Ações específicas ao abrir cada aba
-    if (tabId === 'tab-arena') {
-      sincronizarArena3D();
-      setTimeout(() => {
-        window.dispatchEvent(new Event('resize'));
-        sincronizarArena3D();
-      }, 100);
-    } else if (tabId === 'tab-fechamento') {
+    if (tabId === 'tab-fechamento') {
       renderizarAnalytics();
       atualizarPainelFechamento();
     }
@@ -1109,96 +1150,7 @@
   }
 
   function sincronizarArena3D() {
-    // Dispara busca assíncrona global para a Arena 3D se ainda não carregada (garante comparação entre todos os 5 vendedores)
-    if (!AppState.leadsArenaGlobal && !AppState.carregandoArenaGlobal && window.IsapelSync && typeof window.IsapelSync.carregarLeadsArenaNuvem === 'function') {
-      AppState.carregandoArenaGlobal = true;
-      window.IsapelSync.carregarLeadsArenaNuvem().then(leadsArena => {
-        AppState.carregandoArenaGlobal = false;
-        if (Array.isArray(leadsArena) && leadsArena.length > 0) {
-          AppState.leadsArenaGlobal = leadsArena;
-          sincronizarArena3D();
-        }
-      }).catch(() => {
-        AppState.carregandoArenaGlobal = false;
-      });
-    }
-
-    const todos = obterLeadsConsolidadasArena();
-    let metricas = null;
-
-    if (window.IsapelCRM && typeof window.IsapelCRM.calcularMetricasArena === 'function') {
-      metricas = window.IsapelCRM.calcularMetricasArena('todos', todos);
-    } else {
-      metricas = calcularMetricasArenaFallback(todos);
-    }
-
-    if (!metricas) return;
-
-    const rankingArray = Array.isArray(metricas) ? metricas : Object.values(metricas);
-
-    // Se o Three.js da Arena3D estiver ativo, atualiza com os dados reais de todos os 5 vendedores
-    if (window.Arena3D && typeof window.Arena3D.atualizar === 'function') {
-      window.Arena3D.atualizar(rankingArray);
-    }
-
-    // Atualiza o Pódio 2D da coluna lateral
-    function atualizarPilar(num, p) {
-      if (!p) return;
-      const elNome = document.getElementById(`podium-name-${num}`);
-      const elVal = document.getElementById(`podium-score-${num}`);
-      const elAv = document.getElementById(`podium-avatar-${num}`);
-
-      const nomesMap = { maciel: 'Gabriel Maciel', daniel: 'Daniel' };
-      const iniciaisMap = { maciel: 'GM', daniel: 'DA' };
-      const nomeVendedor = p.vendedor?.nome || nomesMap[p.vendedorId] || p.vendedorId;
-      const iniciais = iniciaisMap[p.vendedorId] || (p.vendedorId ? p.vendedorId.substring(0, 2).toUpperCase() : 'CO');
-
-      if (elNome) elNome.textContent = nomeVendedor;
-      if (elVal) elVal.textContent = p.volumeTotalFaturado > 0 ? formatarMoeda(p.volumeTotalFaturado) : `${p.pontuacaoGeral || 0} XP`;
-      if (elAv) elAv.textContent = iniciais;
-    }
-
-    atualizarPilar(1, rankingArray[0]);
-    atualizarPilar(2, rankingArray[1]);
-    atualizarPilar(3, rankingArray[2]);
-
-    const maxXP = Math.max(100, ...rankingArray.map(item => Number(item.pontuacaoGeral) || 0));
-    const rankingListContainer = document.querySelector('.crm-ranking-list');
-
-    // Atualiza as barras de progresso laterais e ordena os itens conforme colocação
-    rankingArray.forEach((p, idx) => {
-      const id = p.vendedorId;
-      const rowEl = document.getElementById(`ranking-row-${id}`);
-      const valEl = document.getElementById(`ranking-val-${id}`);
-      const barEl = document.getElementById(`ranking-bar-${id}`);
-      const nameEl = rowEl ? rowEl.querySelector('.crm-ranking-item__name') : null;
-      const nomesMap = { maciel: 'Gabriel Maciel', daniel: 'Daniel' };
-
-      if (nameEl) {
-        const nomeBase = p.vendedor?.nome || nomesMap[id] || id;
-        nameEl.textContent = `${idx + 1}º ${nomeBase}`;
-      }
-      if (valEl) {
-        valEl.textContent = p.volumeTotalFaturado > 0 
-          ? `${formatarMoeda(p.volumeTotalFaturado)} • ${p.pontuacaoGeral || 0} XP`
-          : `${p.totalCadastrados || 0} leads (${p.pontuacaoGeral || 0} XP)`;
-      }
-      if (barEl) {
-        const metasMap = { maciel: 60000, daniel: 45000 };
-        const meta = metasMap[id] || 40000;
-        const faturado = p.volumeTotalFaturado || 0;
-        let pct = 5;
-        if (faturado > 0) {
-          pct = Math.min(100, Math.max(8, Math.round((faturado / meta) * 100)));
-        } else {
-          pct = Math.min(100, Math.max(8, Math.round(((p.pontuacaoGeral || 0) / maxXP) * 100)));
-        }
-        barEl.style.width = `${pct}%`;
-      }
-      if (rowEl && rankingListContainer) {
-        rankingListContainer.appendChild(rowEl);
-      }
-    });
+    // Arena 3D removida no CRM Prospecções
   }
 
   function calcularMetricasArenaFallback(leadsCustom) {
